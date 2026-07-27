@@ -447,7 +447,7 @@
 
         // --- Core Functions ---
         async function callGeminiAPI(key, image) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${key}`;
+            const apiUrl = `const apiUrl =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
 
             // A more advanced prompt asking for a structured JSON response
             const prompt = `
@@ -492,9 +492,14 @@
             });
 
             if (!response.ok) {
-                const errorBody = await response.json();
-                throw new Error(`API Error: ${response.status} - ${errorBody.error?.message || 'Unknown error'}`);
-            }
+    const errorBody = await response.json();
+
+    console.log(errorBody);
+
+    throw new Error(
+        `${response.status}\n${JSON.stringify(errorBody, null, 2)}`
+    );
+}
 
             const result = await response.json();
             const candidate = result.candidates?.[0];
